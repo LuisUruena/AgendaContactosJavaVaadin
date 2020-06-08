@@ -33,8 +33,9 @@ public class ServicioContacto {
 	/**
 	 * @return all available Contacto objects.
 	 */
-	public synchronized List<Contacto> findAll() {
-		return null;
+	public synchronized List<Contacto> findAll() 
+	{
+		return findAll(null);
 	}
 
 	/**
@@ -46,7 +47,22 @@ public class ServicioContacto {
 	 */
 	public synchronized List<Contacto> findAll(String stringFilter) 
 	{
-		return null;
+		ArrayList<Contacto> arrayList = new ArrayList<>();
+		for (Contacto contact : contacts.values()) {
+			boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
+					|| contact.toString().toLowerCase().contains(stringFilter.toLowerCase());
+			if (passesFilter) {
+				arrayList.add(contact.clone());
+			}
+		}
+		Collections.sort(arrayList, new Comparator<Contacto>() {
+
+			@Override
+			public int compare(Contacto o1, Contacto o2) {
+				return (int) (o2.getId() - o1.getId());
+			}
+		});
+		return arrayList;
 	}
 
 	/**
@@ -68,7 +84,7 @@ public class ServicioContacto {
 	 */
 	public synchronized long count() 
 	{
-		return -1;
+		return contacts.size();
 	}
 
 	/**
@@ -78,6 +94,7 @@ public class ServicioContacto {
 	 */
 	public synchronized void delete(Contacto value) 
 	{
+		contacts.remove(value.getId());
 	}
 
 	/**
@@ -88,7 +105,21 @@ public class ServicioContacto {
 	 */
 	public synchronized void save(Contacto entry) 
 	{
-		
+		if (entry == null) 
+		{
+			LOGGER.log(Level.SEVERE,
+					"El contacto está vacío.");
+			return;
+		}
+		if (entry.getId() == null) {
+			entry.setId(nextId++);
+		}
+		try {
+			entry = (Contacto) entry.clone();
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+		contacts.put(entry.getId(), entry);
 	}
 
 	/**
