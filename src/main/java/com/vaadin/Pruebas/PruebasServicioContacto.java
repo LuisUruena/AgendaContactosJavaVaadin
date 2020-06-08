@@ -36,8 +36,8 @@ class PruebasServicioContacto {
 		assertEquals(serviciodatos.findAll().size(),1);
 		assertTrue(serviciodatos.findAll().get(0).equals(contactoPrueba1));
 		serviciodatos.save(contactoPrueba2);
-		assertEquals(serviciodatos.count(),1);
-		assertEquals(serviciodatos.findAll().size(),1);
+		assertEquals(serviciodatos.count(),2);
+		assertEquals(serviciodatos.findAll().size(),2);
 	}
 
 }
