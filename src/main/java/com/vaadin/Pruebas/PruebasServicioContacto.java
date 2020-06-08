@@ -52,5 +52,23 @@ class PruebasServicioContacto {
 		assertEquals(serviciodatos.findAll("Microsoft Corporation").size(),2);
 		
 	}
+	
+	@Test
+	void testDelete() 
+	{
+		this.serviciodatos = new ServicioContacto();
+		Contacto contactoPrueba1 = new Contacto(new Long(1),"Gabrielle","Patel","Apple Inc.","PatelKalash@gmail.com","653842564","Calle Pantomima Full, 45");
+		serviciodatos.save(contactoPrueba1);
+		Contacto contactoPrueba2 = new Contacto(new Long(2),"Pedro","Carlino","Microsoft Corporation","CarlinoPerrete@gmail.com","658942063","Calle Falsa, 123");
+		serviciodatos.save(contactoPrueba2);
+		
+		serviciodatos.delete(contactoPrueba1);
+		assertEquals(serviciodatos.count(),1);
+		assertEquals(serviciodatos.findAll("Gabrielle").size(),0);
+		serviciodatos.delete(contactoPrueba2);
+		assertEquals(serviciodatos.count(),0);
+		assertEquals(serviciodatos.findAll("Carlino").size(),0);
+		
+	}
 
 }
