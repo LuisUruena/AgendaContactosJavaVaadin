@@ -122,9 +122,13 @@ public class ServicioContacto {
 		contacts.put(entry.getId(), entry);
 	}
 
+	
 	/**
 	 * Sample data generation
 	 */
+	public void saveSampleData() {
+		
+		}
 
 
 }

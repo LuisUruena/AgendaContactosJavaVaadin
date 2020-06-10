@@ -70,5 +70,13 @@ class PruebasServicioContacto {
 		assertEquals(serviciodatos.findAll("Carlino").size(),0);
 		
 	}
+	
+	@Test
+	void testSampleData() 
+	{
+		this.serviciodatos = new ServicioContacto();
+		assertEquals(serviciodatos.count(),2);
+		
+	}
 
 }
