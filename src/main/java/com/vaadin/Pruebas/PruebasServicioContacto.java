@@ -75,6 +75,7 @@ class PruebasServicioContacto {
 	void testSampleData() 
 	{
 		this.serviciodatos = new ServicioContacto();
+		serviciodatos.saveSampleData();
 		assertEquals(serviciodatos.count(),2);
 		
 	}
