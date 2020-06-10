@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -34,7 +35,12 @@ public class PruebasUtilidadesJSON
 	public void testCargarJSON() 
 	{
 		serviciodatos = new ServicioContacto();
-		serviciodatos.cargarFicheroJSON();
+		try {
+			serviciodatos.cargarFicheroJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(serviciodatos.count(),2);
 	}
 

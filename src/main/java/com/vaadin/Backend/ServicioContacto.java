@@ -1,5 +1,6 @@
 package com.vaadin.Backend;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,7 +142,7 @@ public class ServicioContacto {
 		UtilidadesJSON.guardarJSON(RUTA, contacts);
 	}
 	
-	public void cargarFicheroJSON() 
+	public void cargarFicheroJSON() throws FileNotFoundException 
 	{
 		this.contacts = UtilidadesJSON.cargarJSON(RUTA);
 		if (contacts == null) 
