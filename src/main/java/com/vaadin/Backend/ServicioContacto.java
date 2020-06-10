@@ -144,6 +144,10 @@ public class ServicioContacto {
 	public void cargarFicheroJSON() 
 	{
 		this.contacts = UtilidadesJSON.cargarJSON(RUTA);
+		if (contacts == null) 
+		{
+			contacts = new HashMap<>();
+		}
 		
 	}
 

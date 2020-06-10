@@ -1,5 +1,6 @@
 package com.vaadin.Pruebas;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -27,6 +28,14 @@ public class PruebasUtilidadesJSON
 		File archivoJSON = new File(serviciodatos.RUTA);
 		assertTrue(archivoJSON.exists());
 		
+	}
+	
+	@Test
+	public void testCargarJSON() 
+	{
+		serviciodatos = new ServicioContacto();
+		serviciodatos.cargarFicheroJSON();
+		assertEquals(serviciodatos.count(),2);
 	}
 
 }
