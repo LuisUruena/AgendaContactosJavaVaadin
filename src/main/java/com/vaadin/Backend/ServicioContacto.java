@@ -16,8 +16,7 @@ public class ServicioContacto {
 	private final HashMap<Long, Contacto> contacts = new HashMap<>();
 	private long nextId = 0;
 
-	public ServicioContacto() 
-	{
+	public ServicioContacto() {
 	}
 
 	/**
@@ -33,8 +32,7 @@ public class ServicioContacto {
 	/**
 	 * @return all available Contacto objects.
 	 */
-	public synchronized List<Contacto> findAll() 
-	{
+	public synchronized List<Contacto> findAll() {
 		return findAll(null);
 	}
 
@@ -45,8 +43,7 @@ public class ServicioContacto {
 	 *                     string if all objects should be returned.
 	 * @return list a Customer objects
 	 */
-	public synchronized List<Contacto> findAll(String stringFilter) 
-	{
+	public synchronized List<Contacto> findAll(String stringFilter) {
 		ArrayList<Contacto> arrayList = new ArrayList<>();
 		for (Contacto contact : contacts.values()) {
 			boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
@@ -74,16 +71,14 @@ public class ServicioContacto {
 	 * @param maxresults   maximum result count
 	 * @return list a Customer objects
 	 */
-	public synchronized List<Contacto> findAll(String stringFilter, int start, int maxresults) 
-	{
+	public synchronized List<Contacto> findAll(String stringFilter, int start, int maxresults) {
 		return null;
 	}
 
 	/**
 	 * @return the amount of all customers in the system
 	 */
-	public synchronized long count() 
-	{
+	public synchronized long count() {
 		return contacts.size();
 	}
 
@@ -92,8 +87,7 @@ public class ServicioContacto {
 	 *
 	 * @param value the Customer to be deleted
 	 */
-	public synchronized void delete(Contacto value) 
-	{
+	public synchronized void delete(Contacto value) {
 		contacts.remove(value.getId());
 	}
 
@@ -103,12 +97,9 @@ public class ServicioContacto {
 	 *
 	 * @param entry
 	 */
-	public synchronized void save(Contacto entry) 
-	{
-		if (entry == null) 
-		{
-			LOGGER.log(Level.SEVERE,
-					"El contacto está vacío.");
+	public synchronized void save(Contacto entry) {
+		if (entry == null) {
+			LOGGER.log(Level.SEVERE, "El contacto está vacío.");
 			return;
 		}
 		if (entry.getId() == null) {
@@ -122,13 +113,24 @@ public class ServicioContacto {
 		contacts.put(entry.getId(), entry);
 	}
 
-	
 	/**
 	 * Sample data generation
 	 */
 	public void saveSampleData() {
-		
+
+		if (findAll().isEmpty()) {
+			ArrayList<Contacto> contactos = new ArrayList<>();
+
+			contactos.add(new Contacto(null, "Gabrielle", "Patel", "Apple Inc.", "PatelKalash@gmail.com", "653842564",
+					"Calle Pantomima Full, 45"));
+			contactos.add(new Contacto(null, "Pedro", "Carlino", "Microsoft Corporation", "CarlinoPerrete@gmail.com",
+					"658942063", "Calle Falsa, 123"));
+
+			for (Contacto c : contactos) {
+				save(c);
+			}
 		}
 
+	}
 
 }
