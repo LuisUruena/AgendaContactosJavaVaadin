@@ -1,5 +1,6 @@
 package com.vaadin.Backend;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,7 +14,9 @@ public class ServicioContacto {
 	private static ServicioContacto instance;
 	private static final Logger LOGGER = Logger.getLogger(ServicioContacto.class.getName());
 
-	private final HashMap<Long, Contacto> contacts = new HashMap<>();
+	private HashMap<Long, Contacto> contacts = new HashMap<>();
+	public final String RUTA = "agenda.json";   
+	
 	private long nextId = 0;
 
 	public ServicioContacto() {
@@ -96,7 +99,7 @@ public class ServicioContacto {
 	 * new Customer instances.
 	 *
 	 * @param entry
-	 */
+	 **/
 	public synchronized void save(Contacto entry) {
 		if (entry == null) {
 			LOGGER.log(Level.SEVERE, "El contacto está vacío.");
@@ -131,6 +134,17 @@ public class ServicioContacto {
 			}
 		}
 
+	}
+	
+	public void guardarFicheroJSON() throws IOException 
+	{
+		UtilidadesJSON.guardarJSON(RUTA, contacts);
+	}
+	
+	public void cargarFicheroJSON() 
+	{
+		this.contacts = UtilidadesJSON.cargarJSON(RUTA);
+		
 	}
 
 }
