@@ -17,7 +17,7 @@
 	<properties>
 		<vaadin.version>8.6.2</vaadin.version>
 		<vaadin.plugin.version>8.6.2</vaadin.plugin.version>
-		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
+		<jetty.plugin.version>9.4.30.v20200611</jetty.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -154,7 +154,7 @@
 								<artifactItem>
 									<groupId>org.eclipse.jetty</groupId>
 									<artifactId>jetty-runner</artifactId>
-									<version>9.3.3.v20150827</version>
+									<version>9.4.30.v20200611</version>
 									<destFileName>jetty-runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
