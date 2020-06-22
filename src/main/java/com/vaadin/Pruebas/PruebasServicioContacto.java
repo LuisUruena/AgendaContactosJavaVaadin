@@ -3,19 +3,19 @@ package com.vaadin.Pruebas;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 import com.vaadin.Backend.Contacto;
 import com.vaadin.Backend.ServicioContacto;
 
-class PruebasServicioContacto {
+public class PruebasServicioContacto {
 	
 	private ServicioContacto serviciodatos;
 
 	@Test
-	void testSave() 
+	void testSave() throws IOException 
 	{
 		this.serviciodatos = new ServicioContacto();
 		assertEquals(serviciodatos.count(),0);
@@ -25,7 +25,7 @@ class PruebasServicioContacto {
 	}
 	
 	@Test
-	void testFindAll() 
+	void testFindAll() throws IOException 
 	{
 		this.serviciodatos = new ServicioContacto();
 		assertEquals(serviciodatos.findAll().size(),0);
@@ -54,7 +54,7 @@ class PruebasServicioContacto {
 	}
 	
 	@Test
-	void testDelete() 
+	void testDelete() throws IOException 
 	{
 		this.serviciodatos = new ServicioContacto();
 		Contacto contactoPrueba1 = new Contacto(new Long(1),"Gabrielle","Patel","Apple Inc.","PatelKalash@gmail.com","653842564","Calle Pantomima Full, 45");

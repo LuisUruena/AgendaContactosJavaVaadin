@@ -18,9 +18,17 @@ public class ServicioContacto {
 	private HashMap<Long, Contacto> contacts = new HashMap<>();
 	public final String RUTA = "agenda.json";   
 	
-	private long nextId = 0;
+	private long nextId = 1;
 
-	public ServicioContacto() {
+	public ServicioContacto() 
+	{
+		try {
+			this.cargarFicheroJSON();
+		} catch (FileNotFoundException e) 
+		{
+			this.saveSampleData();
+		}
+		
 	}
 
 	/**
@@ -90,9 +98,11 @@ public class ServicioContacto {
 	 * Deletes a customer from a system
 	 *
 	 * @param value the Customer to be deleted
+	 * @throws IOException 
 	 */
-	public synchronized void delete(Contacto value) {
+	public synchronized void delete(Contacto value) throws IOException {
 		contacts.remove(value.getId());
+		this.guardarFicheroJSON();
 	}
 
 	/**
@@ -100,13 +110,14 @@ public class ServicioContacto {
 	 * new Customer instances.
 	 *
 	 * @param entry
+	 * @throws IOException 
 	 **/
-	public synchronized void save(Contacto entry) {
+	public synchronized void save(Contacto entry) throws IOException {
 		if (entry == null) {
 			LOGGER.log(Level.SEVERE, "El contacto está vacío.");
 			return;
 		}
-		if (entry.getId() == null) {
+		if (entry.getId() == -1) {
 			entry.setId(nextId++);
 		}
 		try {
@@ -115,23 +126,30 @@ public class ServicioContacto {
 			throw new RuntimeException(ex);
 		}
 		contacts.put(entry.getId(), entry);
+		this.guardarFicheroJSON();
 	}
 
 	/**
 	 * Sample data generation
+	 * @throws IOException 
 	 */
 	public void saveSampleData() {
 
 		if (findAll().isEmpty()) {
 			ArrayList<Contacto> contactos = new ArrayList<>();
 
-			contactos.add(new Contacto(null, "Gabrielle", "Patel", "Apple Inc.", "PatelKalash@gmail.com", "653842564",
+			contactos.add(new Contacto(new Long(-1), "Gabrielle", "Patel", "Apple Inc.", "PatelKalash@gmail.com", "653842564",
 					"Calle Pantomima Full, 45"));
-			contactos.add(new Contacto(null, "Pedro", "Carlino", "Microsoft Corporation", "CarlinoPerrete@gmail.com",
+			contactos.add(new Contacto(new Long(-1), "Pedro", "Carlino", "Microsoft Corporation", "CarlinoPerrete@gmail.com",
 					"658942063", "Calle Falsa, 123"));
 
 			for (Contacto c : contactos) {
-				save(c);
+				try {
+					save(c);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -150,6 +168,19 @@ public class ServicioContacto {
 			contacts = new HashMap<>();
 		}
 		
+		this.actualizarID();
+		
+	}
+	
+	private void actualizarID() 
+	{
+		for (Long id: contacts.keySet()) 
+		{
+			if (id >= this.nextId) 
+			{
+				nextId = id+1;
+			}
+		}
 	}
 
 }
