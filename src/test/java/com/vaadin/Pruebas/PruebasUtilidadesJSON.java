@@ -1,7 +1,6 @@
 package com.vaadin.Pruebas;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,9 +10,9 @@ import org.junit.Test;
 
 import com.vaadin.Backend.ServicioContacto;
 
-public class PruebasUtilidadesJSON 
-{
-	private ServicioContacto serviciodatos;
+public class PruebasUtilidadesJSON {
+
+private ServicioContacto serviciodatos;
 	
 	@Test
 	public void testGuardarJSON()

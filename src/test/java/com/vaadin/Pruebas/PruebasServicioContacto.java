@@ -1,17 +1,16 @@
 package com.vaadin.Pruebas;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.vaadin.Backend.Contacto;
 import com.vaadin.Backend.ServicioContacto;
 
 public class PruebasServicioContacto {
-	
+
 	private ServicioContacto serviciodatos;
 
 	@Test
