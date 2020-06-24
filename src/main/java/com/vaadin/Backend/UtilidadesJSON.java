@@ -30,9 +30,17 @@ public class UtilidadesJSON
 		File archivoJSON = new File(ruta);
 		String JSON;
 		Scanner lectorFichero = new Scanner (archivoJSON);
-		JSON = lectorFichero.nextLine();
-		Type tipo = new TypeToken<HashMap<Long, Contacto>>(){}.getType();
-	    HashMap<Long, Contacto> contactos = gson.fromJson(JSON, tipo); 
+		HashMap<Long, Contacto> contactos;
+		if(lectorFichero.hasNextLine()) 
+		{
+			JSON = lectorFichero.nextLine();
+			Type tipo = new TypeToken<HashMap<Long, Contacto>>(){}.getType();
+			contactos = gson.fromJson(JSON, tipo);
+		} 
+		else 
+		{
+			contactos = new HashMap<Long, Contacto>();
+		}
 		
 		return contactos;
 	}
